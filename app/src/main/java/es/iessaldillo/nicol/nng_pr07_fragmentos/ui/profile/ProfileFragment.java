@@ -71,13 +71,13 @@ public class ProfileFragment extends Fragment {
         setHasOptionsMenu(true);
         vmMain = ViewModelProviders.of(requireActivity()).get(MainActivityViewModel.class);
         Objects.requireNonNull(getView());
-        setupViews(getView());
+        setupToolbar();
+        setupViews(getView(),savedInstanceState);
     }
 
-    private void setupViews(View view) {
+    private void setupViews(View view,Bundle savedInstanceState) {
         //Initializations
         errorMsg = getString(R.string.main_invalid_data);
-
         imgAvatar = ViewCompat.requireViewById(view, R.id.imgAvatar);
         lblAvatar = ViewCompat.requireViewById(view, R.id.lblAvatar);
 
@@ -100,16 +100,19 @@ public class ProfileFragment extends Fragment {
 
         vmPR.setProfileUser(vmMain.user);
 
+        if(savedInstanceState == null){
+
+        }
         if (vmPR.getProfileUser() == null) {
             vmPR.setProfileUser(new User());
             vmPR.setAddUser(true);
             vmPR.setDefaultAvatar();
-            configAvatarProfile();
         } else {
             vmPR.setAddUser(false);
             showUser();
         }
 
+        configAvatarProfile();
 
         //Listeners
         imgAvatar.setOnClickListener(v -> vmMain.goToAvatar(vmPR.getProfileAvatar()));
@@ -292,6 +295,7 @@ public class ProfileFragment extends Fragment {
             }else{
                 vmPR.editUser(vmPR.getProfileUser());
             }
+            getFragmentManager().popBackStack();
         } else {
             SnackBarUtils.showSnackBar(lblFields[NAME], getString(R.string.main_error_saving));
         }
@@ -343,8 +347,9 @@ public class ProfileFragment extends Fragment {
     private void setupToolbar() {
         ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(false);
-            actionBar.setTitle(getString(R.string.list_title));
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setIcon(R.drawable.ic_arrow_back_white_24dp);
+            actionBar.setTitle(getString(R.string.profile_title));
         }
     }
 }

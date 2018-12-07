@@ -7,7 +7,7 @@ import es.iessaldillo.nicol.nng_pr07_fragmentos.model.User;
 
 public class ProfileFragmentViewModel extends ViewModel {
 
-    private Database database;
+    private Database database = Database.getInstance();
     private boolean firstLaunch = false;
 
     private boolean addUser = true;
@@ -36,13 +36,9 @@ public class ProfileFragmentViewModel extends ViewModel {
         return database;
     }
 
-    //Sets the avatar to the default one (One time use)
     public void setDefaultAvatar() {
-        if (!firstLaunch) {
-            setProfileAvatar(getDatabase().getDefaultAvatar());
-            firstLaunch = true;
-        }
-
+        setProfileAvatar(getDatabase().getDefaultAvatar());
+        firstLaunch = true;
 
     }
 
