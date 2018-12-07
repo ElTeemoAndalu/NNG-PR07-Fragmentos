@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clRoot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/lblName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/userListItem_nameExample"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/imgAvatar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/lblEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/userListItem_emailExample"
+                app:layout_constraintEnd_toStartOf="@+id/imgAvatar"
+                app:layout_constraintStart_toStartOf="@+id/lblName"
+                app:layout_constraintTop_toBottomOf="@+id/lblName" />
+
+            <TextView
+                android:id="@+id/lblPhone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/userListItem_examplePhone"
+                app:layout_constraintEnd_toStartOf="@+id/imgAvatar"
+                app:layout_constraintStart_toStartOf="@+id/lblEmail"
+                app:layout_constraintTop_toBottomOf="@+id/lblEmail" />
+
+            <Button
+                android:id="@+id/btnEdit"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/userListItem_btnEdit"
+                app:layout_constraintStart_toStartOf="@+id/lblPhone"
+                app:layout_constraintTop_toBottomOf="@+id/lblPhone" />
+
+            <Button
+                android:id="@+id/btnDelete"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/userListItem_btnDelete"
+                app:layout_constraintBottom_toBottomOf="@+id/btnEdit"
+                app:layout_constraintStart_toEndOf="@+id/btnEdit"
+                app:layout_constraintTop_toBottomOf="@+id/lblPhone" />
+
+            <ImageView
+                android:id="@+id/imgAvatar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/imgAvatar_description"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/lblPhone"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/cat1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
