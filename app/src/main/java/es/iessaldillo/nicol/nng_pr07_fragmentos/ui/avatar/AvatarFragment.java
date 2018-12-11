@@ -42,7 +42,6 @@ public class AvatarFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_avatar, container, false);
     }
 
@@ -64,7 +63,7 @@ public class AvatarFragment extends Fragment {
         int LBL_IMGVIEWS_PER_PICTURE = 2;
 
         if(savedInstanceState == null){
-            vmAV.setSelectedAvatar(vmMain.getAvatar());
+            vmAV.setSelectedAvatar(vmMain.getAvatar().getValue());
         }
 
         imagesList = new ArrayList<>();
@@ -161,7 +160,7 @@ public class AvatarFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.mnuSave) {
+        if (item.getItemId() == R.id.mnuSelect) {
             vmMain.setAvatar(vmAV.getSelectedAvatar());
             getFragmentManager().popBackStack();
             return true;

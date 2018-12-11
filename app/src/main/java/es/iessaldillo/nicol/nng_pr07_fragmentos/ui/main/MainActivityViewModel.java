@@ -9,13 +9,11 @@ import es.iessaldillo.nicol.nng_pr07_fragmentos.model.User;
 
 public class MainActivityViewModel extends ViewModel {
 
-    public Database database = Database.getInstance();
-
     public MutableLiveData<Boolean> launchProfile = new MutableLiveData<>();
     public User user;
 
     public MutableLiveData<Boolean> launchAvatar = new MutableLiveData<>();
-    public Avatar avatar;
+    public MutableLiveData<Avatar> avatar = new MutableLiveData<>();
 
     MainActivityViewModel(){
         launchProfile.setValue(false);
@@ -28,7 +26,7 @@ public class MainActivityViewModel extends ViewModel {
     }
 
     public void goToAvatar(Avatar avatar){
-        this.avatar = avatar;
+        this.avatar.setValue(avatar);
         launchAvatar.setValue(true);
     }
 
@@ -58,12 +56,12 @@ public class MainActivityViewModel extends ViewModel {
         this.user = user;
     }
 
-    public Avatar getAvatar() {
+    public LiveData<Avatar> getAvatar() {
         return avatar;
     }
 
     public void setAvatar(Avatar avatar) {
-        this.avatar = avatar;
+        this.avatar.setValue(avatar);
     }
 
 }

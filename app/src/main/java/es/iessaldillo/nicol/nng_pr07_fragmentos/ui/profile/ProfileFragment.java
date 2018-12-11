@@ -102,6 +102,10 @@ public class ProfileFragment extends Fragment {
         imgWeb = ViewCompat.requireViewById(view, R.id.imgWeb);
 
 
+        vmMain.getAvatar().observe(this, avatar -> {
+            vmPR.setProfileAvatar(vmMain.getAvatar().getValue());
+            configAvatarProfile();
+        });
         if(savedInstanceState == null){
             vmPR.setProfileUser(vmMain.user);
         }
