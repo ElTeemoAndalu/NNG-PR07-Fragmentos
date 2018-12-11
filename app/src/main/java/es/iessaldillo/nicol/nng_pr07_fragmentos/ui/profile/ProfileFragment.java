@@ -26,11 +26,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import es.iessaldillo.nicol.nng_pr07_fragmentos.R;
 import es.iessaldillo.nicol.nng_pr07_fragmentos.model.User;
 import es.iessaldillo.nicol.nng_pr07_fragmentos.ui.main.MainActivityViewModel;
 import es.iessaldillo.nicol.nng_pr07_fragmentos.utils.FieldEnabler;
+import es.iessaldillo.nicol.nng_pr07_fragmentos.utils.FragmentUtils;
 import es.iessaldillo.nicol.nng_pr07_fragmentos.utils.KeyboardUtils;
 import es.iessaldillo.nicol.nng_pr07_fragmentos.utils.SnackBarUtils;
 import es.iessaldillo.nicol.nng_pr07_fragmentos.utils.ValidationUtils;
@@ -47,7 +50,6 @@ public class ProfileFragment extends Fragment {
     private final EditText[] txtFields = new EditText[EDITTEXT_QUANTITY];
     private final TextView[] lblFields = new TextView[EDITTEXT_QUANTITY];
     private String errorMsg;
-    public static final String EXTRA_PROFILE = "EXTRA_PROFILE";
     private ImageView imgEmail,imgPhone,imgAddress,imgWeb;
     private ProfileFragmentViewModel vmPR;
     private MainActivityViewModel vmMain;
@@ -70,6 +72,7 @@ public class ProfileFragment extends Fragment {
         vmPR = ViewModelProviders.of(this).get(ProfileFragmentViewModel.class);
         setHasOptionsMenu(true);
         vmMain = ViewModelProviders.of(requireActivity()).get(MainActivityViewModel.class);
+        vmMain.setLaunchProfile(false);
         Objects.requireNonNull(getView());
         setupToolbar();
         setupViews(getView(),savedInstanceState);
@@ -98,10 +101,9 @@ public class ProfileFragment extends Fragment {
         imgAddress = ViewCompat.requireViewById(view, R.id.imgAddress);
         imgWeb = ViewCompat.requireViewById(view, R.id.imgWeb);
 
-        vmPR.setProfileUser(vmMain.user);
 
         if(savedInstanceState == null){
-
+            vmPR.setProfileUser(vmMain.user);
         }
         if (vmPR.getProfileUser() == null) {
             vmPR.setProfileUser(new User());

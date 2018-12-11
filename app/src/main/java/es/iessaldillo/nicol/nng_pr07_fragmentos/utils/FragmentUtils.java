@@ -23,4 +23,8 @@ public class FragmentUtils {
                 transition).addToBackStack(backstackTag).commit();
     }
 
+    public static void removeFragment(@NonNull FragmentManager fragmentManager,@NonNull Fragment fragment,@NonNull int transition){
+        fragmentManager.beginTransaction().remove(fragment).setTransition(transition).commit();
+    }
+
 }

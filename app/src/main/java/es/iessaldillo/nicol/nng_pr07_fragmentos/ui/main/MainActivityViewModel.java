@@ -15,8 +15,12 @@ public class MainActivityViewModel extends ViewModel {
     public User user;
 
     public MutableLiveData<Boolean> launchAvatar = new MutableLiveData<>();
+    public Avatar avatar;
 
-    public Avatar avatarSentToProfile;
+    MainActivityViewModel(){
+        launchProfile.setValue(false);
+        launchAvatar.setValue(false);
+    }
 
     public void goToProfile(User user){
         this.user = user;
@@ -24,7 +28,7 @@ public class MainActivityViewModel extends ViewModel {
     }
 
     public void goToAvatar(Avatar avatar){
-        avatarSentToProfile = avatar;
+        this.avatar = avatar;
         launchAvatar.setValue(true);
     }
 
@@ -32,9 +36,19 @@ public class MainActivityViewModel extends ViewModel {
         return launchProfile;
     }
 
-    public void setLaunchProfile(boolean state) {
-        launchProfile.setValue(state);
+    public void setLaunchProfile(boolean launchState) {
+        launchProfile.setValue(launchState);
     }
+
+
+    public LiveData<Boolean> getLaunchAvatar() {
+        return launchAvatar;
+    }
+
+    public void setLaunchAvatar(boolean launchState) {
+        launchProfile.setValue(launchState);
+    }
+
 
     public User getUser() {
         return user;
@@ -44,12 +58,12 @@ public class MainActivityViewModel extends ViewModel {
         this.user = user;
     }
 
-    public Avatar getAvatarSentToProfile() {
-        return avatarSentToProfile;
+    public Avatar getAvatar() {
+        return avatar;
     }
 
-    public void setAvatarSentToProfile(Avatar avatarSentToProfile) {
-        this.avatarSentToProfile = avatarSentToProfile;
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 
 }

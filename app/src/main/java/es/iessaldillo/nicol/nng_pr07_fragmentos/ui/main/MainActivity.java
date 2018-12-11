@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import es.iessaldillo.nicol.nng_pr07_fragmentos.R;
+import es.iessaldillo.nicol.nng_pr07_fragmentos.ui.avatar.AvatarFragment;
 import es.iessaldillo.nicol.nng_pr07_fragmentos.ui.profile.ProfileFragment;
 import es.iessaldillo.nicol.nng_pr07_fragmentos.ui.userlist.UserListFragment;
 import es.iessaldillo.nicol.nng_pr07_fragmentos.utils.FragmentUtils;
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String PROFILE_FRAGMENT_TAG = "PROFILE_FRAGMENT_TAG";
     private MainActivityViewModel vm;
+    private String AVATAR_FRAGMENT_TAG = "AVATAR_FRAGMENT_TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,30 +32,35 @@ public class MainActivity extends AppCompatActivity {
 
     private void observeProfileCall() {
         vm.getLaunchProfile().observe(this, profileSwitch -> {
-            goToProfile();
+            if(profileSwitch){
+                goToProfile();
+            }
         });
     }
 
     private void observeAvatarCall() {
-        vm.getLaunchProfile().observe(this, profileSwitch -> {
-            goToAvatar();
+        vm.getLaunchAvatar().observe(this, avatarSwitch -> {
+            if(avatarSwitch){
+                goToAvatar();
+            }
         });
     }
 
     private void goToProfile() {
-        FragmentUtils.replaceFragmentAddToBackstack(getSupportFragmentManager(), R.id.flContent,
-                ProfileFragment.newInstance(), ProfileFragment.class.getSimpleName(),PROFILE_FRAGMENT_TAG,FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+        if(getSupportFragmentManager().findFragmentByTag(PROFILE_FRAGMENT_TAG) == null){
+            FragmentUtils.replaceFragmentAddToBackstack(getSupportFragmentManager(), R.id.flContent,
+                    ProfileFragment.newInstance(), ProfileFragment.class.getSimpleName(),PROFILE_FRAGMENT_TAG,FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+        }
+
     }
 
     private void goToAvatar() {
-//        FragmentUtils.replaceFragmentAddToBackstack(getSupportFragmentManager(), R.id.flContent,
-//                AvatarFragment.newInstance(), AvatarFragment.class.getSimpleName(),PROFILE_FRAGMENT_TAG,FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
-    }
+        if(getSupportFragmentManager().findFragmentByTag(AvatarFragment.class.getSimpleName()) == null){
+            FragmentUtils.replaceFragmentAddToBackstack(getSupportFragmentManager(), R.id.flContent,
+                    AvatarFragment.newInstance(), AvatarFragment.class.getSimpleName(),AVATAR_FRAGMENT_TAG,FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+        }
 
-//    private void goToAvatar(User user) {
-//        FragmentUtils.replaceFragmentAddToBackstack(getSupportFragmentManager(), R.id.flContent,
-//                AvatarFragment.newInstance(), AvatarFragment.class.getSimpleName(),PROFILE_FRAGMENT_TAG,FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
-//    }
+    }
 
     @Override
     public boolean onSupportNavigateUp() {
