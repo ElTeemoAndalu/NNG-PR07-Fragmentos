@@ -103,10 +103,7 @@ public class ProfileFragment extends Fragment {
 
         observeAvatarChanges();
 
-        if(savedInstanceState == null){
-            vmPR.setProfileUser(vmMain.user);
-            vmMain.setAvatar(vmPR.getProfileAvatar());
-        }
+
         if (vmPR.getProfileUser() == null) {
             vmPR.setProfileUser(new User());
             vmPR.setAddUser(true);
