@@ -101,18 +101,17 @@ public class ProfileFragment extends Fragment {
         imgAddress = ViewCompat.requireViewById(view, R.id.imgAddress);
         imgWeb = ViewCompat.requireViewById(view, R.id.imgWeb);
 
+        observeAvatarChanges();
 
-        vmMain.getAvatar().observe(this, avatar -> {
-            vmPR.setProfileAvatar(vmMain.getAvatar().getValue());
-            configAvatarProfile();
-        });
         if(savedInstanceState == null){
             vmPR.setProfileUser(vmMain.user);
+            vmMain.setAvatar(vmPR.getProfileAvatar());
         }
         if (vmPR.getProfileUser() == null) {
             vmPR.setProfileUser(new User());
             vmPR.setAddUser(true);
             vmPR.setDefaultAvatar();
+            vmMain.setAvatar(vmPR.getProfileAvatar());
         } else {
             vmPR.setAddUser(false);
             showUser();
@@ -346,8 +345,6 @@ public class ProfileFragment extends Fragment {
         txtFields[PHONE].setText(vmPR.getProfileUser().getPhone());
         txtFields[ADDRESS].setText(vmPR.getProfileUser().getAddress());
         txtFields[WEB].setText(vmPR.getProfileUser().getWeb());
-
-        configAvatarProfile();
     }
 
     private void setupToolbar() {
@@ -357,5 +354,12 @@ public class ProfileFragment extends Fragment {
             actionBar.setIcon(R.drawable.ic_arrow_back_white_24dp);
             actionBar.setTitle(getString(R.string.profile_title));
         }
+    }
+
+    public void observeAvatarChanges(){
+        vmMain.getAvatar().observe(this, avatar -> {
+            vmPR.setProfileAvatar(vmMain.getAvatar().getValue());
+            configAvatarProfile();
+        });
     }
 }

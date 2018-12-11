@@ -44,7 +44,7 @@ public class MainActivityViewModel extends ViewModel {
     }
 
     public void setLaunchAvatar(boolean launchState) {
-        launchProfile.setValue(launchState);
+        launchAvatar.setValue(launchState);
     }
 
 

@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToProfile() {
-        if(getSupportFragmentManager().findFragmentByTag(PROFILE_FRAGMENT_TAG) == null){
+        if(getSupportFragmentManager().findFragmentByTag(ProfileFragment.class.getSimpleName()) == null){
             FragmentUtils.replaceFragmentAddToBackstack(getSupportFragmentManager(), R.id.flContent,
                     ProfileFragment.newInstance(), ProfileFragment.class.getSimpleName(),PROFILE_FRAGMENT_TAG,FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
         }

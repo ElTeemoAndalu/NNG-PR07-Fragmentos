@@ -38,6 +38,11 @@ public class AvatarFragment extends Fragment {
         return new AvatarFragment();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -163,6 +168,8 @@ public class AvatarFragment extends Fragment {
         if (item.getItemId() == R.id.mnuSelect) {
             vmMain.setAvatar(vmAV.getSelectedAvatar());
             getFragmentManager().popBackStack();
+            vmMain.setLaunchAvatar(false);
+
             return true;
         }
         return super.onOptionsItemSelected(item);
